@@ -9,7 +9,7 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperRxInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.interactor.MoviperPresenterForInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperFragmentPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
 
 /**
@@ -34,19 +34,18 @@ public abstract class ViperFragmentBaseRxPresenter
         extends WipeBaseRxPresenter<ViewType, InteractorType>
         implements MoviperPresenter<ViewType>,
         MoviperPresenterForInteractor<InteractorType>,
-        MoviperFragmentPresenterForRouting<RoutingType> {
+        MoviperPresenterForRouting<RoutingType> {
 
     @NonNull
     private RoutingType routing;
 
     public ViperFragmentBaseRxPresenter(@NonNull Fragment fragment) {
-        super();
-        this.routing = createRouting(fragment);
+        this(fragment, null);
     }
 
     public ViperFragmentBaseRxPresenter(@NonNull Fragment fragment, Bundle args) {
         super(args);
-        this.routing = createRouting(fragment);
+        this.routing = createRouting(fragment.getActivity());
     }
 
     @Override

@@ -13,11 +13,14 @@ import com.mateuszkoslacz.moviper.iface.view.MvpViewHolder;
 /**
  * Created by norbertbanaszek on 24.10.2016.
  * <p>
- * An {@link RecyclerView.Adapter} that uses an {@link MvpPresenter} to implement a Model-View-Presenter
+ * An {@link RecyclerView.Adapter} that uses an {@link MvpPresenter} to implement a
+ * Model-View-Presenter
  * architecture.
  */
 
-public abstract class MvpBaseViewHolder<DataObject, View extends MvpViewHolder, Presenter extends MvpPresenter<View>>
+public abstract class MvpBaseViewHolder
+        <DataObject, View extends MvpViewHolder,
+                Presenter extends MvpPresenter<View>>
         extends RecyclerView.ViewHolder
         implements BaseMvpDelegateCallback<View, Presenter>, MvpViewHolder<DataObject> {
 
@@ -29,7 +32,8 @@ public abstract class MvpBaseViewHolder<DataObject, View extends MvpViewHolder, 
         super(itemView);
     }
 
-    @NonNull protected ViewGroupMvpDelegate<View, Presenter> getMvpDelegate() {
+    @NonNull
+    protected ViewGroupMvpDelegate<View, Presenter> getMvpDelegate() {
         if (mvpDelegate == null) {
             mvpDelegate = new ViewGroupMvpDelegateImpl<>(this);
         }
@@ -57,28 +61,34 @@ public abstract class MvpBaseViewHolder<DataObject, View extends MvpViewHolder, 
 
     public abstract Presenter createPresenter();
 
-    @Override public Presenter getPresenter() {
+    @Override
+    public Presenter getPresenter() {
         return mPresenter;
     }
 
-    @Override public void setPresenter(Presenter presenter) {
+    @Override
+    public void setPresenter(Presenter presenter) {
         this.mPresenter = presenter;
     }
 
-    @Override public View getMvpView() {
+    @Override
+    public View getMvpView() {
         return (View) this;
     }
 
-    @Override public boolean isRetainInstance() {
+    @Override
+    public boolean isRetainInstance() {
         return true;
     }
 
-    @Override public void setRetainInstance(boolean retainingInstance) {
+    @Override
+    public void setRetainInstance(boolean retainingInstance) {
         throw new UnsupportedOperationException("Retainining Instance is not supported / implemented yet");
     }
 
-    @Override public boolean shouldInstanceBeRetained() {
+    @Override
+    public boolean shouldInstanceBeRetained() {
         return true;
     }
 
- }
+}

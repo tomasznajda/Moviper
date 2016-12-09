@@ -1,5 +1,6 @@
 package com.mateuszkoslacz.moviper.iface.presenter.routing;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
@@ -28,4 +29,12 @@ public interface MoviperPresenterForRouting<RoutingType extends MoviperRxRouting
      */
     @NonNull
     RoutingType getRouting();
+
+    /**
+     * Instantiate a Routing instance here.
+     *
+     * @return The {@link MoviperRouting} for this view
+     */
+    @NonNull
+    RoutingType createRouting(@NonNull Activity activity);
 }

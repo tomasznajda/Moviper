@@ -5,12 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
-import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperRxInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.interactor.MoviperPresenterForInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperActivityPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
 
 /**
@@ -35,14 +34,13 @@ public abstract class ViperActivityBaseRxPresenter
         extends WipeBaseRxPresenter<ViewType, InteractorType>
         implements MoviperPresenter<ViewType>,
         MoviperPresenterForInteractor<InteractorType>,
-        MoviperActivityPresenterForRouting<RoutingType> {
+        MoviperPresenterForRouting<RoutingType> {
 
     @NonNull
     private RoutingType routing;
 
     public ViperActivityBaseRxPresenter(@NonNull Activity activity) {
-        super();
-        this.routing = createRouting(activity);
+        this(activity, null);
     }
 
     public ViperActivityBaseRxPresenter(@NonNull Activity activity, Bundle args) {

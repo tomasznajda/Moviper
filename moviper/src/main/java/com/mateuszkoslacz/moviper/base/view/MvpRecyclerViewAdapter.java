@@ -9,11 +9,13 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 /**
  * Created by norbertbanaszek on 24.10.2016.
  * <p>
- * An {@link RecyclerView.Adapter} that uses an {@link MvpPresenter} to implement a Model-View-Presenter
+ * An {@link RecyclerView.Adapter} that uses an {@link MvpPresenter} to implement a
+ * Model-View-Presenter
  * architecture.
  */
 
-public abstract class MvpRecyclerViewAdapter<View extends MvpView,
+public abstract class MvpRecyclerViewAdapter
+        <View extends MvpView,
                 Presenter extends MvpPresenter<View>,
                 ViewHolder extends MvpBaseViewHolder>
         extends RecyclerView.Adapter<ViewHolder> {

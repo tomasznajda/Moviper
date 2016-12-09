@@ -11,8 +11,8 @@ import rx.subscriptions.CompositeSubscription;
  * Created by tnajda on 22.11.2016.
  */
 
-public class MoviperBaseRxPresenter<V extends MvpView>
-        extends MoviperBasePresenter<V> {
+public class MoviperBaseRxPresenter<ViewType extends MvpView>
+        extends MoviperBasePresenter<ViewType> {
 
     private CompositeSubscription compositeSubscription;
 

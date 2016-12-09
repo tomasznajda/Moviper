@@ -1,6 +1,6 @@
 package com.mateuszkoslacz.moviper.ipcsample.viper.presenter;
 
-import android.graphics.Color;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -74,13 +74,13 @@ public class ColorWidgetPresenter
 
     @NonNull
     @Override
-    public ColorWidgetContract.Routing createRouting(@NonNull Fragment fragment) {
-        return new ColorWidgetRouting(fragment);
+    public ColorWidgetContract.Interactor createInteractor() {
+        return new ColorWidgetInteractor();
     }
 
     @NonNull
     @Override
-    public ColorWidgetContract.Interactor createInteractor() {
-        return new ColorWidgetInteractor();
+    public ColorWidgetContract.Routing createRouting(@NonNull Activity activity) {
+        return new ColorWidgetRouting(activity);
     }
 }

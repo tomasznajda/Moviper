@@ -2,9 +2,8 @@ package com.mateuszkoslacz.moviper.recyclerviewsample.viper.routing;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.view.View;
 
-import com.mateuszkoslacz.moviper.base.routing.ViewHolderBaseRxRouting;
+import com.mateuszkoslacz.moviper.base.routing.BaseRxRouting;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.contract.ProductContract;
 
 /**
@@ -12,10 +11,10 @@ import com.mateuszkoslacz.moviper.recyclerviewsample.viper.contract.ProductContr
  */
 
 public class ProductRouting
-        extends ViewHolderBaseRxRouting
+        extends BaseRxRouting
         implements ProductContract.Routing {
 
-    public ProductRouting(@NonNull View view) {
-        super((Activity) view.getContext());
+    public ProductRouting(@NonNull Activity activity) {
+        super(activity);
     }
 }

@@ -12,9 +12,9 @@ import com.mateuszkoslacz.moviper.presenterbus.Moviper;
  * Created by mateuszkoslacz on 24.10.2016.
  */
 
-public abstract class MoviperBasePresenter<V extends MvpView>
-        extends MvpBasePresenter<V>
-        implements MoviperPresenter<V> {
+public abstract class MoviperBasePresenter<ViewType extends MvpView>
+        extends MvpBasePresenter<ViewType>
+        implements MoviperPresenter<ViewType> {
 
     private Bundle args;
 
@@ -35,8 +35,8 @@ public abstract class MoviperBasePresenter<V extends MvpView>
     }
 
     @Override
-    public void attachView(V view) {
-        super.attachView(view);
+    public void attachView(ViewType viewType) {
+        super.attachView(viewType);
         Moviper.getInstance().register(this);
     }
 

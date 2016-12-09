@@ -5,10 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
-import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperFragmentPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
 
 /**
@@ -30,8 +29,8 @@ public abstract class PervFragmentBaseRxPresenter
         <RoutingType extends MoviperRxRouting,  // I prefer readability rather than conventions
                 ViewType extends MvpView>
         extends MoviperBaseRxPresenter<ViewType>
-        implements MoviperFragmentPresenterForRouting<RoutingType>,
-        MoviperPresenter<ViewType> {
+        implements MoviperPresenter<ViewType>,
+        MoviperPresenterForRouting<RoutingType> {
 
     @NonNull
     private RoutingType routing;
@@ -42,7 +41,7 @@ public abstract class PervFragmentBaseRxPresenter
 
     public PervFragmentBaseRxPresenter(@NonNull Fragment fragment, Bundle args) {
         super(args);
-        this.routing = createRouting(fragment);
+        this.routing = createRouting(fragment.getActivity());
     }
 
     @Override

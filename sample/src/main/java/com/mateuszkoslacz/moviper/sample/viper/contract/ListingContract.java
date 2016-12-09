@@ -4,7 +4,7 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.interactor.MoviperPresenterForInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperActivityPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
 import com.mateuszkoslacz.moviper.sample.viper.entity.User;
 
@@ -60,7 +60,7 @@ public interface ListingContract {
         void startUserDetailsActivity(User user);
     }
 
-    interface PresenterForRouting extends MoviperActivityPresenterForRouting<Routing> {
+    interface PresenterForRouting extends MoviperPresenterForRouting<Routing> {
         // Defines what methods the Routing can invoke on the Presenter.
         // In most cases there will be system framework interaction callbacks and error notifying.
 
