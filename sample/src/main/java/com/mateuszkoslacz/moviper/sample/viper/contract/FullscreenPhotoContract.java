@@ -3,8 +3,8 @@ package com.mateuszkoslacz.moviper.sample.viper.contract;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.interactor.MoviperPresenterForInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
 
 public interface FullscreenPhotoContract {

@@ -1,20 +1,22 @@
-package com.mateuszkoslacz.moviper.base.presenter;
+package com.mateuszkoslacz.moviper.base.presenter.viper;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
-import com.mateuszkoslacz.moviper.iface.interactor.MoviperRxInteractor;
+import com.mateuszkoslacz.moviper.base.presenter.wipe.WipeBasePresenter;
+import com.mateuszkoslacz.moviper.iface.interactor.MoviperInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
-import com.mateuszkoslacz.moviper.iface.presenter.interactor.MoviperPresenterForInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
-import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
 
 /**
- * Created by jjodelka on 29/11/2016.
+ * Created by norbertbanaszek on 26.10.2016.
  * <p>
  * Viper - View, Interactor, Presenter, Entities, Routing
  * <p>
@@ -28,31 +30,25 @@ import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
  * {@link com.hannesdorfmann.mosby.mvp.viewstate.lce.MvpLceViewStateFragment})
  */
 
-public abstract class ViperViewHolderBaseRxPresenter
-        <ViewType extends MvpView,  // I prefer readability rather than conventions
-                InteractorType extends MoviperRxInteractor,
-                RoutingType extends MoviperRxRouting>
-        extends WipeBaseRxPresenter<ViewType, InteractorType>
+public abstract class ViperViewHolderBasePresenter
+        <ViewType extends MvpView,
+                InteractorType extends MoviperInteractor,
+                RoutingType extends MoviperRouting>
+        extends WipeBasePresenter<ViewType, InteractorType>
         implements MoviperPresenter<ViewType>,
         MoviperPresenterForInteractor<InteractorType>,
         MoviperPresenterForRouting<RoutingType> {
 
-    @NonNull
+    @Nullable
     private RoutingType routing;
 
-    public ViperViewHolderBaseRxPresenter(@NonNull View view) {
+    public ViperViewHolderBasePresenter(@NonNull View view) {
         this(view, null);
     }
 
-    public ViperViewHolderBaseRxPresenter(@NonNull View view, Bundle args) {
+    public ViperViewHolderBasePresenter(@NonNull View view, Bundle args) {
         super(args);
         this.routing = createRouting((Activity) view.getContext());
-    }
-
-    @Override
-    public void detachView(boolean retainInstance) {
-        super.detachView(retainInstance);
-        routing.onPresenterDetached(retainInstance);
     }
 
     @Override
@@ -61,9 +57,23 @@ public abstract class ViperViewHolderBaseRxPresenter
         return routing != null;
     }
 
+    @Override
+    public void attachView(ViewType view) {
+        super.attachView(view);
+        //noinspection unchecked
+        routing.attachPresenter(this);
+    }
+
+    @Override
+    public void detachView(boolean retainInstance) {
+        super.detachView(retainInstance);
+        routing.detachPresenter();
+    }
+
     @NonNull
     @Override
     public RoutingType getRouting() {
         return routing;
     }
 }
+

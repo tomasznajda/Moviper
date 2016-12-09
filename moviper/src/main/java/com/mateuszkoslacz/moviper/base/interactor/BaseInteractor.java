@@ -4,7 +4,7 @@ package com.mateuszkoslacz.moviper.base.interactor;
 import android.support.annotation.Nullable;
 
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.interactor.MoviperPresenterForInteractor;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
 import com.mateuszkoslacz.moviper.util.WeakReferenceUtils;
 
 import java.lang.ref.WeakReference;

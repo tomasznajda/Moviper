@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import com.mateuszkoslacz.moviper.base.presenter.ViperActivityBasePresenter;
+import com.mateuszkoslacz.moviper.base.presenter.viper.ViperActivityBasePresenter;
 import com.mateuszkoslacz.moviper.sample.viper.contract.FullscreenPhotoContract;
 import com.mateuszkoslacz.moviper.sample.viper.interactor.FullscreenPhotoInteractor;
 import com.mateuszkoslacz.moviper.sample.viper.routing.FullscreenPhotoRouting;

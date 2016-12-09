@@ -1,4 +1,4 @@
-package com.mateuszkoslacz.moviper.base.presenter;
+package com.mateuszkoslacz.moviper.base.presenter.viper;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,10 +6,11 @@ import android.support.annotation.NonNull;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.mateuszkoslacz.moviper.base.presenter.wipe.WipeBaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperRxInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
-import com.mateuszkoslacz.moviper.iface.presenter.interactor.MoviperPresenterForInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
 
 /**

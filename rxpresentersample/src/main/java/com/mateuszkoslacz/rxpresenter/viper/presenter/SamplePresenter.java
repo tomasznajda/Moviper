@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.app.Activity;
 
-import com.mateuszkoslacz.moviper.base.presenter.ViperActivityBaseRxPresenter;
+import com.mateuszkoslacz.moviper.base.presenter.viper.ViperActivityBaseRxPresenter;
 import com.mateuszkoslacz.rxpresenter.viper.contract.SampleContract;
 import com.mateuszkoslacz.rxpresenter.viper.interactor.SampleInteractor;
 import com.mateuszkoslacz.rxpresenter.viper.routing.SampleRouting;

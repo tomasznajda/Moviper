@@ -1,4 +1,4 @@
-package com.mateuszkoslacz.moviper.base.presenter;
+package com.mateuszkoslacz.moviper.base.presenter.viper;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,14 +6,17 @@ import android.support.v4.app.Fragment;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.mateuszkoslacz.moviper.base.presenter.wipe.WipeBasePresenter;
+import com.mateuszkoslacz.moviper.iface.interactor.MoviperInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
 
 /**
- * Created by mateuszkoslacz on 09.08.2016.
+ * Created by mateuszkoslacz on 08.08.2016.
  * <p>
- * Perv - Presenter, Entities, Routing, View.
+ * Viper - View, Interactor, Presenter, Entities, Routing
  * <p>
  * This is a Fragment version of base presenter class for mentioned set of concepts.
  * (see {@link MvpBasePresenter})
@@ -25,21 +28,23 @@ import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
  * {@link com.hannesdorfmann.mosby.mvp.viewstate.lce.MvpLceViewStateFragment})
  */
 //TODO migrate to MvpNullObjectPresenter base class?
-public abstract class PervFragmentBasePresenter
-        <RoutingType extends MoviperRouting,  // I prefer readability rather than conventions
-                ViewType extends MvpView>
-        extends MoviperBasePresenter<ViewType>
+public abstract class ViperFragmentBasePresenter
+        <ViewType extends MvpView,  // I prefer readability rather than conventions
+                InteractorType extends MoviperInteractor,
+                RoutingType extends MoviperRouting>
+        extends WipeBasePresenter<ViewType, InteractorType>
         implements MoviperPresenter<ViewType>,
+        MoviperPresenterForInteractor<InteractorType>,
         MoviperPresenterForRouting<RoutingType> {
 
     @NonNull
     private RoutingType routing;
 
-    public PervFragmentBasePresenter(@NonNull Fragment fragment) {
+    public ViperFragmentBasePresenter(@NonNull Fragment fragment) {
         this(fragment, null);
     }
 
-    public PervFragmentBasePresenter(@NonNull Fragment fragment, Bundle args) {
+    public ViperFragmentBasePresenter(@NonNull Fragment fragment, Bundle args) {
         super(args);
         this.routing = createRouting(fragment.getActivity());
     }

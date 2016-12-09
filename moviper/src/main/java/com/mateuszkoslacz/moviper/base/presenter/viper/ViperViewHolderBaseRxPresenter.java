@@ -1,23 +1,25 @@
-package com.mateuszkoslacz.moviper.base.presenter;
+package com.mateuszkoslacz.moviper.base.presenter.viper;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.mateuszkoslacz.moviper.base.presenter.wipe.WipeBaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperRxInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
-import com.mateuszkoslacz.moviper.iface.presenter.interactor.MoviperPresenterForInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
 
 /**
- * Created by mateuszkoslacz on 08.08.2016.
+ * Created by jjodelka on 29/11/2016.
  * <p>
  * Viper - View, Interactor, Presenter, Entities, Routing
  * <p>
- * This is a Fragment version of base presenter class for mentioned set of concepts.
+ * This is a ViewHolder version of base presenter class for mentioned set of concepts.
  * (see {@link MvpBasePresenter})
  * <p>
  * You can use any Mosby Activity View with this class
@@ -26,8 +28,8 @@ import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
  * {@link com.hannesdorfmann.mosby.mvp.viewstate.MvpViewStateFragment},
  * {@link com.hannesdorfmann.mosby.mvp.viewstate.lce.MvpLceViewStateFragment})
  */
-//TODO migrate to MvpNullObjectPresenter base class?
-public abstract class ViperFragmentBaseRxPresenter
+
+public abstract class ViperViewHolderBaseRxPresenter
         <ViewType extends MvpView,  // I prefer readability rather than conventions
                 InteractorType extends MoviperRxInteractor,
                 RoutingType extends MoviperRxRouting>
@@ -39,13 +41,13 @@ public abstract class ViperFragmentBaseRxPresenter
     @NonNull
     private RoutingType routing;
 
-    public ViperFragmentBaseRxPresenter(@NonNull Fragment fragment) {
-        this(fragment, null);
+    public ViperViewHolderBaseRxPresenter(@NonNull View view) {
+        this(view, null);
     }
 
-    public ViperFragmentBaseRxPresenter(@NonNull Fragment fragment, Bundle args) {
+    public ViperViewHolderBaseRxPresenter(@NonNull View view, Bundle args) {
         super(args);
-        this.routing = createRouting(fragment.getActivity());
+        this.routing = createRouting((Activity) view.getContext());
     }
 
     @Override

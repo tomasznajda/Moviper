@@ -1,4 +1,4 @@
-package com.mateuszkoslacz.moviper.base.presenter;
+package com.mateuszkoslacz.moviper.base.presenter.perv;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,9 +6,10 @@ import android.support.annotation.NonNull;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.mateuszkoslacz.moviper.base.presenter.MoviperBaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
-import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
 
 /**
  * Created by mateuszkoslacz on 09.08.2016.
@@ -25,42 +26,35 @@ import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
  * {@link com.hannesdorfmann.mosby.mvp.viewstate.lce.MvpLceViewStateActivity})
  */
 //TODO migrate to MvpNullObjectPresenter base class?
-public abstract class PervActivityBasePresenter
-        <RoutingType extends MoviperRouting,  // I prefer readability rather than conventions
+public abstract class PervActivityBaseRxPresenter
+        <RoutingType extends MoviperRxRouting,  // I prefer readability rather than conventions
                 ViewType extends MvpView>
-        extends MoviperBasePresenter<ViewType>
+        extends MoviperBaseRxPresenter<ViewType>
         implements MoviperPresenter<ViewType>,
         MoviperPresenterForRouting<RoutingType> {
 
     @NonNull
     private RoutingType routing;
 
-    public PervActivityBasePresenter(@NonNull Activity activity) {
+    public PervActivityBaseRxPresenter(@NonNull Activity activity) {
         this(activity, null);
     }
 
-    public PervActivityBasePresenter(@NonNull Activity activity, Bundle args) {
+    public PervActivityBaseRxPresenter(@NonNull Activity activity, Bundle args) {
         super(args);
         this.routing = createRouting(activity);
+    }
+
+    @Override
+    public void detachView(boolean retainInstance) {
+        super.detachView(retainInstance);
+        routing.onPresenterDetached(retainInstance);
     }
 
     @Override
     @Deprecated
     public boolean isRoutingAttached() {
         return routing != null;
-    }
-
-    @Override
-    public void attachView(ViewType view) {
-        super.attachView(view);
-        //noinspection unchecked
-        routing.attachPresenter(this);
-    }
-
-    @Override
-    public void detachView(boolean retainInstance) {
-        super.detachView(retainInstance);
-        routing.detachPresenter();
     }
 
     @NonNull

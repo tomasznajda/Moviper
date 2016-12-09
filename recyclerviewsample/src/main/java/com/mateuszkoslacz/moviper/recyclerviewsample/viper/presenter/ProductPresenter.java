@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.mateuszkoslacz.moviper.base.presenter.ViperViewHolderBaseRxPresenter;
+import com.mateuszkoslacz.moviper.base.presenter.viper.ViperViewHolderBaseRxPresenter;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.contract.ProductContract;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.entity.Product;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.interactor.ProductInteractor;

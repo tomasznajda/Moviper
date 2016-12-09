@@ -2,7 +2,7 @@ package com.mateuszkoslacz.moviper.iface.routing;
 
 import android.support.annotation.Nullable;
 
-import com.mateuszkoslacz.moviper.iface.presenter.routing.MoviperPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
 import com.mateuszkoslacz.moviper.iface.viewhelper.MoviperViewHelper;
 
 /**

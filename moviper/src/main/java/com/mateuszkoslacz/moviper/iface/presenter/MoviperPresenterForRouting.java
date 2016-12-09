@@ -1,4 +1,4 @@
-package com.mateuszkoslacz.moviper.iface.presenter.routing;
+package com.mateuszkoslacz.moviper.iface.presenter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;

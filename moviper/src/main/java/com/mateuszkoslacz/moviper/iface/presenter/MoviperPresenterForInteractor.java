@@ -1,4 +1,4 @@
-package com.mateuszkoslacz.moviper.iface.presenter.interactor;
+package com.mateuszkoslacz.moviper.iface.presenter;
 
 import android.support.annotation.NonNull;
 

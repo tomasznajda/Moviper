@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import com.mateuszkoslacz.moviper.annotation.ExternalCall;
-import com.mateuszkoslacz.moviper.base.presenter.ViperFragmentBaseRxPresenter;
+import com.mateuszkoslacz.moviper.base.presenter.viper.ViperFragmentBaseRxPresenter;
 import com.mateuszkoslacz.moviper.ipcsample.viper.contract.ColorWidgetContract;
 import com.mateuszkoslacz.moviper.ipcsample.viper.interactor.ColorWidgetInteractor;
 import com.mateuszkoslacz.moviper.ipcsample.viper.routing.ColorWidgetRouting;

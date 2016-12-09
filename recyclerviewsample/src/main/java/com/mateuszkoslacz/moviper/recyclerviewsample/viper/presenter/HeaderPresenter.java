@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.mateuszkoslacz.moviper.base.presenter.ViperViewHolderBaseRxPresenter;
+import com.mateuszkoslacz.moviper.base.presenter.viper.ViperViewHolderBaseRxPresenter;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.contract.HeaderContract;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.interactor.HeaderInteractor;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.routing.HeaderRouting;

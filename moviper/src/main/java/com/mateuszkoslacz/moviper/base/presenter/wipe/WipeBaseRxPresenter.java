@@ -1,13 +1,14 @@
-package com.mateuszkoslacz.moviper.base.presenter;
+package com.mateuszkoslacz.moviper.base.presenter.wipe;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
-import com.mateuszkoslacz.moviper.iface.interactor.MoviperInteractor;
+import com.mateuszkoslacz.moviper.base.presenter.MoviperBaseRxPresenter;
+import com.mateuszkoslacz.moviper.iface.interactor.MoviperRxInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
-import com.mateuszkoslacz.moviper.iface.presenter.interactor.MoviperPresenterForInteractor;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
 
 /**
  * Created by mateuszkoslacz on 08.08.2016. based on original lucas.urbas idea from 29/08/15.
@@ -29,42 +30,35 @@ import com.mateuszkoslacz.moviper.iface.presenter.interactor.MoviperPresenterFor
  * {@link com.hannesdorfmann.mosby.mvp.viewstate.lce.MvpLceViewStateFragment})
  */
 //TODO migrate to MvpNullObjectPresenter base class?
-public abstract class WipeBasePresenter
+public abstract class WipeBaseRxPresenter
         <ViewType extends MvpView, // I prefer readability rather than conventions
-                InteractorType extends MoviperInteractor>
-        extends MoviperBasePresenter<ViewType>
+                InteractorType extends MoviperRxInteractor>
+        extends MoviperBaseRxPresenter<ViewType>
         implements MoviperPresenter<ViewType>,
         MoviperPresenterForInteractor<InteractorType> {
 
     @NonNull
     private InteractorType interactor;
 
-    public WipeBasePresenter() {
+    public WipeBaseRxPresenter() {
         this(null);
     }
 
-    public WipeBasePresenter(Bundle args) {
+    public WipeBaseRxPresenter(Bundle args) {
         super(args);
         this.interactor = createInteractor();
+    }
+
+    @Override
+    public void detachView(boolean retainInstance) {
+        super.detachView(retainInstance);
+        interactor.onPresenterDetached(retainInstance);
     }
 
     @Override
     @Deprecated
     public boolean isInteractorAttached() {
         return interactor != null;
-    }
-
-    @Override
-    public void attachView(ViewType view) {
-        super.attachView(view);
-        //noinspection unchecked
-        interactor.attachPresenter(this);
-    }
-
-    @Override
-    public void detachView(boolean retainInstance) {
-        super.detachView(retainInstance);
-        interactor.detachPresenter();
     }
 
     @NonNull

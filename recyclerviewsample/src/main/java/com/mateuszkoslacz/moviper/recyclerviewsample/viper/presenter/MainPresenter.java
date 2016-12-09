@@ -3,7 +3,7 @@ package com.mateuszkoslacz.moviper.recyclerviewsample.viper.presenter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import com.mateuszkoslacz.moviper.base.presenter.ViperActivityBaseRxPresenter;
+import com.mateuszkoslacz.moviper.base.presenter.viper.ViperActivityBaseRxPresenter;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.contract.MainContract;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.entity.Product;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.entity.Category;
