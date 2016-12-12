@@ -10,9 +10,9 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.base.presenter.wipe.WipeBasePresenter;
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperViewHolderPresenter;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
 
 /**
@@ -35,7 +35,7 @@ public abstract class ViperViewHolderBasePresenter
                 InteractorType extends MoviperInteractor,
                 RoutingType extends MoviperRouting>
         extends WipeBasePresenter<ViewType, InteractorType>
-        implements MoviperPresenter<ViewType>,
+        implements MoviperViewHolderPresenter<ViewType>,
         MoviperPresenterForInteractor<InteractorType>,
         MoviperPresenterForRouting<RoutingType> {
 
@@ -58,6 +58,12 @@ public abstract class ViperViewHolderBasePresenter
     }
 
     @Override
+    public void attachView(ViewType view, Activity activity) {
+        this.attachView(view);
+        routing.attachActivity(activity);
+    }
+
+    @Override
     public void attachView(ViewType view) {
         super.attachView(view);
         //noinspection unchecked
@@ -68,6 +74,7 @@ public abstract class ViperViewHolderBasePresenter
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);
         routing.detachPresenter();
+        routing.detachActivity();
     }
 
     @NonNull

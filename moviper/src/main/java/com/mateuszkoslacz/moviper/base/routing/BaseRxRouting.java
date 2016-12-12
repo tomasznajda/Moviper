@@ -39,6 +39,16 @@ public abstract class BaseRxRouting
     }
 
     @Override
+    public void attachActivity(Activity activity) {
+        this.activity = new WeakReference<>(activity);
+    }
+
+    @Override
+    public void detachActivity() {
+        WeakReferenceUtils.detach(activity);
+    }
+
+    @Override
     public void onPresenterDetached(boolean retainInstance) {
         onPresenterDetached();
         // stub

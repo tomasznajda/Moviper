@@ -1,5 +1,6 @@
 package com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.viewholder;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +37,16 @@ public class ProductViewHolder
         ButterKnife.bind(this, itemView);
     }
 
+    @Override
+    public void setDataObject(Product product) {
+        super.setDataObject(product);
+
+        setTitle(product.getTitle());
+        setDescription(product.getDescription());
+        setPhoto(product.getPhotoUrl());
+        setPrice(product.getPrice());
+    }
+
     public void setTitle(String productTitle) {
         mProductTitle.setText(productTitle);
     }
@@ -54,6 +65,7 @@ public class ProductViewHolder
         mProductPrice.setText(productPrice);
     }
 
+    @NonNull
     @Override
     public ProductContract.Presenter createPresenter() {
         return new ProductPresenter(itemView);

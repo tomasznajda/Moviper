@@ -1,5 +1,6 @@
 package com.mateuszkoslacz.moviper.base.view;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
@@ -8,6 +9,9 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.hannesdorfmann.mosby.mvp.delegate.BaseMvpDelegateCallback;
 import com.hannesdorfmann.mosby.mvp.delegate.ViewGroupMvpDelegate;
 import com.hannesdorfmann.mosby.mvp.delegate.ViewGroupMvpDelegateImpl;
+import com.mateuszkoslacz.moviper.base.delegate.ViewHolderMvpDelegateImpl;
+import com.mateuszkoslacz.moviper.iface.delegate.ViewHolderMvpDelegate;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperViewHolderPresenter;
 import com.mateuszkoslacz.moviper.iface.view.MvpViewHolder;
 
 /**
@@ -20,22 +24,22 @@ import com.mateuszkoslacz.moviper.iface.view.MvpViewHolder;
 
 public abstract class MvpBaseViewHolder
         <DataObject, View extends MvpViewHolder,
-                Presenter extends MvpPresenter<View>>
+                Presenter extends MoviperViewHolderPresenter<View>>
         extends RecyclerView.ViewHolder
         implements BaseMvpDelegateCallback<View, Presenter>, MvpViewHolder<DataObject> {
 
     private DataObject mDataObject;
     protected Presenter mPresenter;
-    protected ViewGroupMvpDelegate<View, Presenter> mvpDelegate;
+    protected ViewHolderMvpDelegateImpl<View, Presenter> mvpDelegate;
 
     public MvpBaseViewHolder(android.view.View itemView) {
         super(itemView);
     }
 
     @NonNull
-    protected ViewGroupMvpDelegate<View, Presenter> getMvpDelegate() {
+    protected ViewHolderMvpDelegate getMvpDelegate() {
         if (mvpDelegate == null) {
-            mvpDelegate = new ViewGroupMvpDelegateImpl<>(this);
+            mvpDelegate = new ViewHolderMvpDelegateImpl<>(this);
         }
 
         return mvpDelegate;
@@ -51,14 +55,15 @@ public abstract class MvpBaseViewHolder
         mDataObject = dataObject;
     }
 
-    public void bindPresenter() {
-        getMvpDelegate().onAttachedToWindow();
+    public void bindPresenter(@NonNull Activity activity) {
+        getMvpDelegate().onAttachedToWindow(activity);
     }
 
     public void unbindPresenter() {
         getMvpDelegate().onDetachedFromWindow();
     }
 
+    @NonNull
     public abstract Presenter createPresenter();
 
     @Override
@@ -83,7 +88,7 @@ public abstract class MvpBaseViewHolder
 
     @Override
     public void setRetainInstance(boolean retainingInstance) {
-        throw new UnsupportedOperationException("Retainining Instance is not supported / implemented yet");
+        throw new UnsupportedOperationException("Retaining instance is not supported yet");
     }
 
     @Override

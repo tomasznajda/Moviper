@@ -9,9 +9,9 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.base.presenter.wipe.WipeBaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperRxInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperViewHolderPresenter;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
 
 /**
@@ -34,7 +34,7 @@ public abstract class ViperViewHolderBaseRxPresenter
                 InteractorType extends MoviperRxInteractor,
                 RoutingType extends MoviperRxRouting>
         extends WipeBaseRxPresenter<ViewType, InteractorType>
-        implements MoviperPresenter<ViewType>,
+        implements MoviperViewHolderPresenter<ViewType>,
         MoviperPresenterForInteractor<InteractorType>,
         MoviperPresenterForRouting<RoutingType> {
 
@@ -51,9 +51,16 @@ public abstract class ViperViewHolderBaseRxPresenter
     }
 
     @Override
+    public void attachView(ViewType view, Activity activity) {
+        super.attachView(view);
+        routing.attachActivity(activity);
+    }
+
+    @Override
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);
         routing.onPresenterDetached(retainInstance);
+        routing.detachActivity();
     }
 
     @Override

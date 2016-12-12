@@ -1,5 +1,6 @@
 package com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.viewholder;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,10 +30,17 @@ public class HeaderViewHolder extends
     }
 
     @Override
+    public void setDataObject(Category category) {
+        super.setDataObject(category);
+        setTitle(category.getName());
+    }
+
+    @Override
     public void setTitle(String title) {
         mProductTitleTextView.setText(title);
     }
 
+    @NonNull
     @Override
     public HeaderContract.Presenter createPresenter() {
         return new HeaderPresenter(itemView);

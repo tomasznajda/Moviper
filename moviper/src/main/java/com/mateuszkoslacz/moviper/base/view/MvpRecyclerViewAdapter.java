@@ -1,5 +1,6 @@
 package com.mateuszkoslacz.moviper.base.view;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
@@ -14,30 +15,16 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
  * architecture.
  */
 
-public abstract class MvpRecyclerViewAdapter
-        <View extends MvpView,
-                Presenter extends MvpPresenter<View>,
-                ViewHolder extends MvpBaseViewHolder>
+public abstract class MvpRecyclerViewAdapter<ViewHolder extends MvpBaseViewHolder>
         extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bindPresenter();
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
+        holder.bindPresenter((Activity) holder.itemView.getContext());
     }
 
     @Override
     public void onViewRecycled(ViewHolder holder) {
-        super.onViewRecycled(holder);
         holder.unbindPresenter();
     }
 
@@ -45,11 +32,5 @@ public abstract class MvpRecyclerViewAdapter
     public boolean onFailedToRecycleView(ViewHolder holder) {
         holder.unbindPresenter();
         return super.onFailedToRecycleView(holder);
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-
-        return super.getItemViewType(position);
     }
 }

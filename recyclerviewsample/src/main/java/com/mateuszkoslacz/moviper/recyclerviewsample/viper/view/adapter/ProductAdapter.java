@@ -3,8 +3,6 @@ package com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.adapter;
 import android.view.ViewGroup;
 
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager;
-import com.hannesdorfmann.mosby.mvp.MvpPresenter;
-import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.base.view.MvpRecyclerViewAdapter;
 import com.mateuszkoslacz.moviper.base.view.MvpBaseViewHolder;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.adapter.agregate.ListingItem;
@@ -19,8 +17,7 @@ import java.util.List;
  */
 
 public class ProductAdapter
-        extends MvpRecyclerViewAdapter<MvpView, MvpPresenter<MvpView>,
-        MvpBaseViewHolder> {
+        extends MvpRecyclerViewAdapter<MvpBaseViewHolder> {
 
     private List<ListingItem> mListingItems;
     private AdapterDelegatesManager mDelegatesManager;
@@ -40,6 +37,7 @@ public class ProductAdapter
 
     @Override
     public void onBindViewHolder(MvpBaseViewHolder holder, int position) {
+        super.onBindViewHolder(holder, position);
         mDelegatesManager.onBindViewHolder(mListingItems, position, holder);
     }
 
