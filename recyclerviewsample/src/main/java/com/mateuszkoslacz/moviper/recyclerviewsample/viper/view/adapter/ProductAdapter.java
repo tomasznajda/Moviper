@@ -37,8 +37,8 @@ public class ProductAdapter
 
     @Override
     public void onBindViewHolder(MvpBaseViewHolder holder, int position) {
-        super.onBindViewHolder(holder, position);
         mDelegatesManager.onBindViewHolder(mListingItems, position, holder);
+        super.onBindViewHolder(holder, position);
     }
 
     @Override
