@@ -1,7 +1,7 @@
 package com.mateuszkoslacz.moviper.recyclerviewsample.viper.contract;
 
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperRxInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.MoviperViewHolderPresenter;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
 import com.mateuszkoslacz.moviper.iface.view.MvpViewHolder;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.entity.Product;
@@ -12,11 +12,15 @@ import com.mateuszkoslacz.moviper.recyclerviewsample.viper.entity.Product;
 
 public interface ProductContract {
 
-    interface Presenter extends MoviperViewHolderPresenter<View> {
+    interface Presenter extends MoviperPresenter<View> {
 
     }
 
-    interface View extends MvpViewHolder<Product> {
+    interface View extends MvpViewHolder {
+
+        Product getProduct();
+
+        void setProduct(Product product);
 
         void setTitle(String productTitle);
 

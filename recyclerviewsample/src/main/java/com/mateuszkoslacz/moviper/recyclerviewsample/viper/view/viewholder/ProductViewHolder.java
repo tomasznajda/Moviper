@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  */
 
 public class ProductViewHolder
-        extends MvpBaseViewHolder<Product, ProductContract.View, ProductContract.Presenter>
+        extends MvpBaseViewHolder<ProductContract.View, ProductContract.Presenter>
         implements ProductContract.View {
 
     @BindView(R.id.product_photo)
@@ -32,15 +32,21 @@ public class ProductViewHolder
     @BindView(R.id.product_description)
     TextView mProductDescription;
 
+    private Product product;
+
     public ProductViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
     @Override
-    public void setDataObject(Product product) {
-        super.setDataObject(product);
+    public Product getProduct() {
+        return product;
+    }
 
+    @Override
+    public void setProduct(Product product) {
+        this.product = product;
         setTitle(product.getTitle());
         setDescription(product.getDescription());
         setPhoto(product.getPhotoUrl());

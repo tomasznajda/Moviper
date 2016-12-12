@@ -18,11 +18,13 @@ import butterknife.ButterKnife;
  */
 
 public class HeaderViewHolder extends
-        MvpBaseViewHolder<Category, HeaderContract.View, HeaderContract.Presenter>
+        MvpBaseViewHolder<HeaderContract.View, HeaderContract.Presenter>
         implements HeaderContract.View {
 
     @BindView(R.id.product_title)
     TextView mProductTitleTextView;
+
+    private Category category;
 
     public HeaderViewHolder(View itemView) {
         super(itemView);
@@ -30,8 +32,13 @@ public class HeaderViewHolder extends
     }
 
     @Override
-    public void setDataObject(Category category) {
-        super.setDataObject(category);
+    public Category getCategory() {
+        return category;
+    }
+
+    @Override
+    public void setCategory(Category category) {
+        this.category = category;
         setTitle(category.getName());
     }
 

@@ -7,13 +7,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
-import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.base.presenter.wipe.WipeBasePresenter;
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperInteractor;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
-import com.mateuszkoslacz.moviper.iface.presenter.MoviperViewHolderPresenter;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
+import com.mateuszkoslacz.moviper.iface.view.MvpViewHolder;
 
 /**
  * Created by norbertbanaszek on 26.10.2016.
@@ -31,11 +31,11 @@ import com.mateuszkoslacz.moviper.iface.routing.MoviperRouting;
  */
 
 public abstract class ViperViewHolderBasePresenter
-        <ViewType extends MvpView,
+        <ViewType extends MvpViewHolder,
                 InteractorType extends MoviperInteractor,
                 RoutingType extends MoviperRouting>
         extends WipeBasePresenter<ViewType, InteractorType>
-        implements MoviperViewHolderPresenter<ViewType>,
+        implements MoviperPresenter<ViewType>,
         MoviperPresenterForInteractor<InteractorType>,
         MoviperPresenterForRouting<RoutingType> {
 
@@ -58,16 +58,11 @@ public abstract class ViperViewHolderBasePresenter
     }
 
     @Override
-    public void attachView(ViewType view, Activity activity) {
-        this.attachView(view);
-        routing.attachActivity(activity);
-    }
-
-    @Override
     public void attachView(ViewType view) {
         super.attachView(view);
         //noinspection unchecked
         routing.attachPresenter(this);
+        routing.attachActivity(view.getActivity());
     }
 
     @Override

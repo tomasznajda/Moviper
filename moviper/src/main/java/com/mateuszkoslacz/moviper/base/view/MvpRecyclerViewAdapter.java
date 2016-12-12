@@ -20,7 +20,7 @@ public abstract class MvpRecyclerViewAdapter<ViewHolder extends MvpBaseViewHolde
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bindPresenter((Activity) holder.itemView.getContext());
+        holder.bindPresenter();
     }
 
     @Override

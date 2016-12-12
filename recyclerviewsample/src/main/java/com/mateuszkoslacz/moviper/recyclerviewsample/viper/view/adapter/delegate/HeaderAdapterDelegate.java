@@ -34,6 +34,6 @@ public class HeaderAdapterDelegate extends AdapterDelegate<List<ListingItem>> {
     protected void onBindViewHolder(@NonNull List<ListingItem> items, int position,
                                     @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
         HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
-        headerViewHolder.setDataObject(((HeaderListingItem) items.get(position)).getCategory());
+        headerViewHolder.setCategory(((HeaderListingItem) items.get(position)).getCategory());
     }
 }

@@ -1,7 +1,7 @@
 package com.mateuszkoslacz.moviper.recyclerviewsample.viper.contract;
 
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperRxInteractor;
-import com.mateuszkoslacz.moviper.iface.presenter.MoviperViewHolderPresenter;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
 import com.mateuszkoslacz.moviper.iface.view.MvpViewHolder;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.entity.Category;
@@ -12,11 +12,15 @@ import com.mateuszkoslacz.moviper.recyclerviewsample.viper.entity.Category;
 
 public interface HeaderContract {
 
-    interface Presenter extends MoviperViewHolderPresenter<View> {
+    interface Presenter extends MoviperPresenter<View> {
 
     }
 
-    interface View extends MvpViewHolder<Category> {
+    interface View extends MvpViewHolder {
+
+        Category getCategory();
+
+        void setCategory(Category category);
 
         void setTitle(String title);
     }

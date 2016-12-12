@@ -5,13 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
-import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.hannesdorfmann.mosby.mvp.delegate.BaseMvpDelegateCallback;
-import com.hannesdorfmann.mosby.mvp.delegate.ViewGroupMvpDelegate;
 import com.hannesdorfmann.mosby.mvp.delegate.ViewGroupMvpDelegateImpl;
-import com.mateuszkoslacz.moviper.base.delegate.ViewHolderMvpDelegateImpl;
-import com.mateuszkoslacz.moviper.iface.delegate.ViewHolderMvpDelegate;
-import com.mateuszkoslacz.moviper.iface.presenter.MoviperViewHolderPresenter;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
 import com.mateuszkoslacz.moviper.iface.view.MvpViewHolder;
 
 /**
@@ -23,40 +19,34 @@ import com.mateuszkoslacz.moviper.iface.view.MvpViewHolder;
  */
 
 public abstract class MvpBaseViewHolder
-        <DataObject, View extends MvpViewHolder,
-                Presenter extends MoviperViewHolderPresenter<View>>
+        <View extends MvpViewHolder,
+                Presenter extends MoviperPresenter<View>>
         extends RecyclerView.ViewHolder
-        implements BaseMvpDelegateCallback<View, Presenter>, MvpViewHolder<DataObject> {
+        implements BaseMvpDelegateCallback<View, Presenter>, MvpViewHolder {
 
-    private DataObject mDataObject;
     protected Presenter mPresenter;
-    protected ViewHolderMvpDelegateImpl<View, Presenter> mvpDelegate;
+    protected ViewGroupMvpDelegateImpl<View, Presenter> mvpDelegate;
 
     public MvpBaseViewHolder(android.view.View itemView) {
         super(itemView);
     }
 
     @NonNull
-    protected ViewHolderMvpDelegate getMvpDelegate() {
+    protected ViewGroupMvpDelegateImpl<View, Presenter> getMvpDelegate() {
         if (mvpDelegate == null) {
-            mvpDelegate = new ViewHolderMvpDelegateImpl<>(this);
+            mvpDelegate = new ViewGroupMvpDelegateImpl<>(this);
         }
 
         return mvpDelegate;
     }
 
     @Override
-    public DataObject getDataObject() {
-        return mDataObject;
+    public Activity getActivity() {
+        return ((Activity) itemView.getContext());
     }
 
-    @Override
-    public void setDataObject(DataObject dataObject) {
-        mDataObject = dataObject;
-    }
-
-    public void bindPresenter(@NonNull Activity activity) {
-        getMvpDelegate().onAttachedToWindow(activity);
+    public void bindPresenter() {
+        getMvpDelegate().onAttachedToWindow();
     }
 
     public void unbindPresenter() {

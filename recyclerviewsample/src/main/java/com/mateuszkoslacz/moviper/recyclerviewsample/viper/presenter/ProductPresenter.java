@@ -29,7 +29,7 @@ public class ProductPresenter
     public void attachView(ProductContract.View view) {
         super.attachView(view);
         if (isViewAttached()) {
-            Product product = getView().getDataObject();
+            Product product = getView().getProduct();
             getView().setTitle(product.getTitle());
             getView().setDescription(product.getDescription());
             getView().setPrice(product.getPrice());

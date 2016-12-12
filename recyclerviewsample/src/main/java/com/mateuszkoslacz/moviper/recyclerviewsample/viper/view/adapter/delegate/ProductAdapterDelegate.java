@@ -35,6 +35,6 @@ public class ProductAdapterDelegate extends AdapterDelegate<List<ListingItem>> {
                                     @NonNull RecyclerView.ViewHolder holder,
                                     @NonNull List<Object> payloads) {
         ProductViewHolder productViewHolder = (ProductViewHolder) holder;
-        productViewHolder.setDataObject(((ProductListingItem) items.get(position)).getProduct());
+        productViewHolder.setProduct(((ProductListingItem) items.get(position)).getProduct());
     }
 }

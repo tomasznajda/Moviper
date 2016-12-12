@@ -6,13 +6,13 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
-import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.mateuszkoslacz.moviper.base.presenter.wipe.WipeBaseRxPresenter;
 import com.mateuszkoslacz.moviper.iface.interactor.MoviperRxInteractor;
+import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenter;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForInteractor;
 import com.mateuszkoslacz.moviper.iface.presenter.MoviperPresenterForRouting;
-import com.mateuszkoslacz.moviper.iface.presenter.MoviperViewHolderPresenter;
 import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
+import com.mateuszkoslacz.moviper.iface.view.MvpViewHolder;
 
 /**
  * Created by jjodelka on 29/11/2016.
@@ -30,11 +30,11 @@ import com.mateuszkoslacz.moviper.iface.routing.MoviperRxRouting;
  */
 
 public abstract class ViperViewHolderBaseRxPresenter
-        <ViewType extends MvpView,  // I prefer readability rather than conventions
+        <ViewType extends MvpViewHolder,  // I prefer readability rather than conventions
                 InteractorType extends MoviperRxInteractor,
                 RoutingType extends MoviperRxRouting>
         extends WipeBaseRxPresenter<ViewType, InteractorType>
-        implements MoviperViewHolderPresenter<ViewType>,
+        implements MoviperPresenter<ViewType>,
         MoviperPresenterForInteractor<InteractorType>,
         MoviperPresenterForRouting<RoutingType> {
 
@@ -51,9 +51,9 @@ public abstract class ViperViewHolderBaseRxPresenter
     }
 
     @Override
-    public void attachView(ViewType view, Activity activity) {
+    public void attachView(ViewType view) {
         super.attachView(view);
-        routing.attachActivity(activity);
+        routing.attachActivity(view.getActivity());
     }
 
     @Override
