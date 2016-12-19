@@ -35,6 +35,7 @@ public class Product {
     }
 
     public static final class Builder {
+
         private String title;
         private String description;
         private String price;

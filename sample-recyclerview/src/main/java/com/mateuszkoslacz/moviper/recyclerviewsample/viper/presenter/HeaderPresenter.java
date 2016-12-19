@@ -13,8 +13,8 @@ import com.mateuszkoslacz.moviper.recyclerviewsample.viper.routing.HeaderRouting
 
 public class HeaderPresenter
         extends BaseRxPresenter<HeaderContract.View,
-                        HeaderContract.Interactor,
-                        HeaderContract.Routing>
+        HeaderContract.Interactor,
+        HeaderContract.Routing>
         implements HeaderContract.Presenter {
 
     @Override

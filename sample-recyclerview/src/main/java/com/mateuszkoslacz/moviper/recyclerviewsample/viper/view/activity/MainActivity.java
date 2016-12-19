@@ -8,9 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import com.mateuszkoslacz.moviper.base.view.activity.ViperActivity;
 import com.mateuszkoslacz.moviper.recyclerviewsample.R;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.contract.MainContract;
+import com.mateuszkoslacz.moviper.recyclerviewsample.viper.entity.Category;
+import com.mateuszkoslacz.moviper.recyclerviewsample.viper.entity.Product;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.presenter.MainPresenter;
 import com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.adapter.ProductAdapter;
-import com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.adapter.agregate.ListingItem;
+import com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.viewholder.HeaderViewHolder;
+import com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.viewholder.ProductViewHolder;
 
 import java.util.List;
 
@@ -37,12 +40,15 @@ public class MainActivity
     }
 
     @Override
-    public void setData(List<ListingItem> listingItems) {
-        mProductAdapter.setListingItems(listingItems);
+    public void setData(List<Object> listingItems) {
+        mProductAdapter.setData(listingItems);
     }
 
     private void configureRecyclerView() {
         mProductAdapter = new ProductAdapter();
+        mProductAdapter.addViewHolder(Category.class, HeaderViewHolder::create);
+        mProductAdapter.addViewHolder(Product.class, ProductViewHolder::create);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mProductAdapter);
     }

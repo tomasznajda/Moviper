@@ -1,7 +1,9 @@
 package com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.viewholder;
 
 import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mateuszkoslacz.moviper.base.view.ViperViewHolder;
@@ -24,9 +26,13 @@ public class HeaderViewHolder
     @BindView(R.id.product_title)
     TextView mProductTitleTextView;
 
-    public HeaderViewHolder(View itemView) {
+    private HeaderViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+    }
+
+    public static HeaderViewHolder create(ViewGroup parent) {
+        return new HeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.vh_header, parent, false));
     }
 
     @Override

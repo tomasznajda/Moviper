@@ -14,8 +14,8 @@ import com.mateuszkoslacz.moviper.recyclerviewsample.viper.routing.ProductRoutin
 
 public class ProductPresenter
         extends BaseRxPresenter<ProductContract.View,
-                        ProductContract.Interactor,
-                        ProductContract.Routing>
+        ProductContract.Interactor,
+        ProductContract.Routing>
         implements ProductContract.Presenter {
 
     @Override

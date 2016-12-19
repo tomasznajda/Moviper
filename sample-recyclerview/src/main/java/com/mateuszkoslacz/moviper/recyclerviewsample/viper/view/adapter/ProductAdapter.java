@@ -1,60 +1,72 @@
 package com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.adapter;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager;
-import com.hannesdorfmann.mosby.mvp.MvpPresenter;
-import com.hannesdorfmann.mosby.mvp.MvpView;
-import com.mateuszkoslacz.moviper.base.view.ViperRecyclerViewAdapter;
 import com.mateuszkoslacz.moviper.base.view.ViperViewHolder;
-import com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.adapter.agregate.ListingItem;
-import com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.adapter.delegate.HeaderAdapterDelegate;
-import com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.adapter.delegate.ProductAdapterDelegate;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by jjodelka on 29/11/2016.
+ * Created by tomasznajda on 19.12.2016.
  */
 
-public class ProductAdapter
-        extends ViperRecyclerViewAdapter<ViperViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ViperViewHolder> {
 
-    private List<ListingItem> mListingItems;
-    private AdapterDelegatesManager mDelegatesManager;
+    protected HashMap<Integer, ViewHolderDelegate> holders = new HashMap<>();
+    protected List<?> data;
 
-    public ProductAdapter() {
-        mListingItems = new ArrayList<>();
-        mDelegatesManager = new AdapterDelegatesManager();
-        mDelegatesManager
-                .addDelegate(ListingItem.TYPE_HEADER, new HeaderAdapterDelegate())
-                .addDelegate(ListingItem.TYPE_PRODUCT, new ProductAdapterDelegate());
+    public void addViewHolder(Class dataObjectClass, ViewHolderDelegate holderDelegate) {
+        holders.put(dataObjectClass.hashCode(), holderDelegate);
+    }
+
+    public void setData(List<?> data) {
+        this.data = data;
+    }
+
+    public List<?> getData() {
+        return data;
     }
 
     @Override
     public ViperViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return (ViperViewHolder) mDelegatesManager.onCreateViewHolder(parent, viewType);
+        return holders.get(viewType).create(parent);
     }
 
     @Override
     public void onBindViewHolder(ViperViewHolder holder, int position) {
-        mDelegatesManager.onBindViewHolder(mListingItems, position, holder);
+        holder.setDataObject(getItem(position));
+        holder.bindPresenter();
     }
 
     @Override
-    public int getItemCount() {
-        return mListingItems != null ? mListingItems.size() : 0;
+    public void onViewRecycled(ViperViewHolder holder) {
+        holder.unbindPresenter();
+    }
+
+    @Override
+    public boolean onFailedToRecycleView(ViperViewHolder holder) {
+        holder.unbindPresenter();
+        return super.onFailedToRecycleView(holder);
     }
 
     @Override
     public int getItemViewType(int position) {
-        return mDelegatesManager.getItemViewType(mListingItems, position);
+        return getItem(position).getClass().hashCode();
     }
 
-    public void setListingItems(List<ListingItem> listingItems) {
-        mListingItems.clear();
-        mListingItems.addAll(listingItems);
-        notifyDataSetChanged();
+    @Override
+    public int getItemCount() {
+        return data.size();
+    }
+
+    public Object getItem(int position) {
+        return data.get(position);
+    }
+
+    public interface ViewHolderDelegate<ViewHolderType extends ViperViewHolder> {
+
+        ViewHolderType create(ViewGroup parent);
     }
 }

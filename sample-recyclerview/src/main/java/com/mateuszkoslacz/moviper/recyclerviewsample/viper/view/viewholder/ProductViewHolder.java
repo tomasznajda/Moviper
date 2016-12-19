@@ -1,7 +1,9 @@
 package com.mateuszkoslacz.moviper.recyclerviewsample.viper.view.viewholder;
 
 import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,9 +34,13 @@ public class ProductViewHolder
     @BindView(R.id.product_description)
     TextView mProductDescription;
 
-    public ProductViewHolder(View itemView) {
+    private ProductViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+    }
+
+    public static ProductViewHolder create(ViewGroup parent) {
+        return new ProductViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.vh_product, parent, false));
     }
 
     public void setTitle(String productTitle) {
