@@ -13,6 +13,9 @@ import rx.Observable
 interface GitHubApiInterface {
 
     val users: Observable<List<User>>
+        @GET("/users")
+        get() = users
+
 
     @GET("/users/{username}")
     fun getUserForUsername(@Path("username") username: String): Observable<User>

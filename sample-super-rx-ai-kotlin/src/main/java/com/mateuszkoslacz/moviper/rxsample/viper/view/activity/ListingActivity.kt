@@ -51,7 +51,7 @@ class ListingActivity :
         errorView?.visibility = View.VISIBLE
         loadingView?.visibility = View.INVISIBLE
         recycler_view?.visibility = View.INVISIBLE
-        errorView?.text = throwable.localizedMessage
+        errorView?.text = throwable.message
     }
 
     override fun showLoading() {

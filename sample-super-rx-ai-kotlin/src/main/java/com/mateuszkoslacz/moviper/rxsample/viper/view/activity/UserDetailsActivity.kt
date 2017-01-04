@@ -43,7 +43,7 @@ class UserDetailsActivity :
 
     override fun setData(user: User) = bindDataToViews(user)
 
-    override fun getErrorMessage(e: Throwable, pullToRefresh: Boolean): String = e.localizedMessage
+    override fun getErrorMessage(e: Throwable, pullToRefresh: Boolean): String = e.message!!
 
     override fun loadData(pullToRefresh: Boolean) {}
 
