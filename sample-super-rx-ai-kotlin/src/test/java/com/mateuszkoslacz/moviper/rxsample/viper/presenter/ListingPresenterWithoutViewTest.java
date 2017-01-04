@@ -38,7 +38,7 @@ public class ListingPresenterWithoutViewTest extends ListingPresenterTest {
         scheduler.triggerActions();
         verify(mView, never()).setUserList(users);
         verify(mView, never()).showContent();
-        verify(mView, never()).showError(any());
+        verify(mView, never()).showError(any(Throwable.class));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class ListingPresenterWithoutViewTest extends ListingPresenterTest {
         IOException e = new IOException();
         subject.onError(e);
         scheduler.triggerActions();
-        verify(mView, never()).setUserList(any());
+        verify(mView, never()).setUserList(any(List.class));
         verify(mView, never()).showContent();
         verify(mView, never()).showError(e);
     }

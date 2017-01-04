@@ -9,7 +9,7 @@ import com.mateuszkoslacz.moviper.rxsample.viper.routing.ListingRouting
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class ListingPresenter :
+open class ListingPresenter :
         BaseRxPresenter<ListingContract.View, ListingContract.Interactor, ListingContract.Routing>(),
         ViperPresenter<ListingContract.View> {
 

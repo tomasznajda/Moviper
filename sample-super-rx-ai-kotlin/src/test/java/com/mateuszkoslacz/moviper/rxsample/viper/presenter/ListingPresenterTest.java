@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class ListingPresenterTest {
         scheduler.triggerActions();
         verify(mView).setUserList(users);
         verify(mView).showContent();
-        verify(mView, never()).showError(any());
+        verify(mView, never()).showError(any(Throwable.class));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class ListingPresenterTest {
         IOException e = new IOException();
         subject.onError(e);
         scheduler.triggerActions();
-        verify(mView, never()).setUserList(any());
+        verify(mView, never()).setUserList(any(List.class));
         verify(mView, never()).showContent();
         verify(mView).showError(e);
     }

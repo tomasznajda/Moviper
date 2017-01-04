@@ -9,7 +9,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import rx.Observable
 
-class ListingInteractor : BaseRxInteractor(), ListingContract.Interactor {
+open class ListingInteractor : BaseRxInteractor(), ListingContract.Interactor {
 
     private val mGitHubApiInterface: GitHubApiInterface
 

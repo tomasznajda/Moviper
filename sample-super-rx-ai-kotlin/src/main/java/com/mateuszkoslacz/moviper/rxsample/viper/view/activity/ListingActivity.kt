@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_listing.*
 import rx.Observable
 import rx.subjects.PublishSubject
 
-class ListingActivity :
+open class ListingActivity :
         ViperAiPassiveActivity<ListingContract.View>(),
         ListingContract.View,
         UserAdapter.UserClickListener {

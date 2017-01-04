@@ -8,7 +8,7 @@ import com.mateuszkoslacz.moviper.rxsample.viper.view.activity.UserDetailsActivi
 import com.mateuszkoslacz.moviper.server.ActivityStarter
 import com.mateuszkoslacz.moviper.server.MoviperPresentersDispatcher
 
-class ListingRouting : BaseRxRouting(), ListingContract.Routing {
+open class ListingRouting : BaseRxRouting(), ListingContract.Routing {
 
     override fun startUserDetailsActivity(user: User) {
         if (isActivityAttached) {

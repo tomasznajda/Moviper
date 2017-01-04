@@ -12,20 +12,15 @@ import com.mateuszkoslacz.moviper.rxsample.viper.presenter.ListingPresenter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ActivityController;
 
 import java.util.Arrays;
 
 import rx.observers.TestSubscriber;
-import rx.schedulers.TestScheduler;
-import rx.subjects.TestSubject;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -36,13 +31,12 @@ import static org.junit.Assert.assertTrue;
  * Created by mateuszkoslacz on 22.11.2016.
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class ListingActivityTest {
 
     @Mock
     private ListingPresenter mListingPresenter;
 
-    @InjectMocks
     private ListingActivity mListingActivity = Robolectric.setupActivity(ListingActivity.class);
 
     private RecyclerView mRecyclerView;
@@ -52,6 +46,7 @@ public class ListingActivityTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        mListingActivity.setPresenter(mListingPresenter);
         mErrorTextView = (TextView) mListingActivity.findViewById(R.id.errorView);
         mProgressBar = (ProgressBar) mListingActivity.findViewById(R.id.loadingView);
         mRecyclerView = (RecyclerView) mListingActivity.findViewById(R.id.recycler_view);

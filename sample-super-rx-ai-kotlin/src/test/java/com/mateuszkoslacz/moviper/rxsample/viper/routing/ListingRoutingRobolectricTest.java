@@ -14,7 +14,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
-import static com.mateuszkoslacz.moviper.rxsample.viper.view.activity.UserDetailsActivity.USER_EXTRA;
 import static org.junit.Assert.assertTrue;
 import static org.robolectric.Robolectric.setupActivity;
 
@@ -41,7 +40,7 @@ public class ListingRoutingRobolectricTest {
         user.setLogin("testUser");
         mRouting.startUserDetailsActivity(user);
         Intent starter = new Intent(mListingActivity, UserDetailsActivity.class);
-        starter.putExtra(Companion.getUSER_EXTRA(), user.getLogin());
+        starter.putExtra(UserDetailsActivity.Companion.getUSER_EXTRA(), user.getLogin());
         assertTrue(Shadows.shadowOf(mListingActivity).getNextStartedActivity().filterEquals(starter));
     }
 }
