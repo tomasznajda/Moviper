@@ -1,17 +1,22 @@
 package com.mateuszkoslacz.moviper.rxsample.viper.presenter;
 
 import com.mateuszkoslacz.moviper.rxsample.viper.entity.User;
+import com.mateuszkoslacz.moviper.rxsample.viper.view.activity.ListingActivity;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
 import rx.schedulers.TestScheduler;
+import rx.subjects.PublishSubject;
 import rx.subjects.TestSubject;
 
 import static org.mockito.Mockito.any;
@@ -31,8 +36,16 @@ public class ListingPresenterWithoutViewTest extends ListingPresenterTest {
         TestScheduler scheduler = new TestScheduler();
         TestSubject<List<User>> subject = TestSubject.create(scheduler);
         when(mInteractor.getUserList()).thenReturn(subject);
-        mPresenter.attachView(null);
-        verify(mView, never()).showLoading();
+        ListingActivity mock = Mockito.mock(ListingActivity.class, new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                if (invocation.getMethod().getReturnType().equals(Observable.class))
+                    return PublishSubject.create();
+                else return null;
+            }
+        });
+        mPresenter.attachView(mock);
+        mPresenter.detachView(false);
         verify(mInteractor).getUserList();
         subject.onNext(users);
         scheduler.triggerActions();
@@ -46,8 +59,16 @@ public class ListingPresenterWithoutViewTest extends ListingPresenterTest {
         TestScheduler scheduler = new TestScheduler();
         TestSubject<List<User>> subject = TestSubject.create(scheduler);
         when(mInteractor.getUserList()).thenReturn(subject);
-        mPresenter.attachView(null);
-        verify(mView, never()).showLoading();
+        ListingActivity mock = Mockito.mock(ListingActivity.class, new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                if (invocation.getMethod().getReturnType().equals(Observable.class))
+                    return PublishSubject.create();
+                else return null;
+            }
+        });
+        mPresenter.attachView(mock);
+        mPresenter.detachView(false);
         verify(mInteractor).getUserList();
         IOException e = new IOException();
         subject.onError(e);
