@@ -25,7 +25,7 @@ import static org.robolectric.Robolectric.setupActivity;
  * Created by mateuszkoslacz on 21.11.2016.
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class ListingRoutingRobolectricTest {
 
     protected ListingRouting mRouting;
@@ -40,6 +40,7 @@ public class ListingRoutingRobolectricTest {
 
     @Test
     public void startUserDetailsActivityIntentTest() throws Exception {
+        MoviperPresentersDispatcher.setInstance(null);
         User user = new User();
         user.setLogin("testUser");
         mRouting.startUserDetailsActivity(user);
