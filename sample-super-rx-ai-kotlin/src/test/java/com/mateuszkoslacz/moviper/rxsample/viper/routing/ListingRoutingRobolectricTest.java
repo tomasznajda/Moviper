@@ -4,7 +4,6 @@ import android.content.Intent;
 
 import com.mateuszkoslacz.moviper.rxsample.BuildConfig;
 import com.mateuszkoslacz.moviper.rxsample.viper.entity.User;
-import com.mateuszkoslacz.moviper.rxsample.viper.presenter.ListingPresenter;
 import com.mateuszkoslacz.moviper.rxsample.viper.presenter.UserDetailsPresenter;
 import com.mateuszkoslacz.moviper.rxsample.viper.view.activity.ListingActivity;
 import com.mateuszkoslacz.moviper.rxsample.viper.view.activity.UserDetailsActivity;
@@ -65,9 +64,9 @@ public class ListingRoutingRobolectricTest {
         ActivityStarter activityStarter = ActivityStarter.newBuilder()
                 .withIntent(starter)
                 .withContext(mListingActivity)
-                .withPresenter(Mockito.mock(ListingPresenter.class)).build();
+                .withPresenter(new UserDetailsPresenter(starter.getExtras()))
+                .build();
 
-
-        Mockito.verify(mPresentersDispatcher, Mockito.only()).startActivity(activityStarter);
+        Mockito.verify(mPresentersDispatcher).startActivity(activityStarter);
     }
 }

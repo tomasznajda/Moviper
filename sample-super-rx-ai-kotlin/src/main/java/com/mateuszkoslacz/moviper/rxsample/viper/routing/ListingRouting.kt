@@ -15,7 +15,7 @@ open class ListingRouting : BaseRxRouting(), ListingContract.Routing {
             val startingIntent = UserDetailsActivity.getStartingIntent(activity!!, user)
             MoviperPresentersDispatcher.getInstance().startActivity(
                     ActivityStarter.newBuilder()
-                            .withContext(activity)
+                            .withContext(activity!!)
                             .withIntent(startingIntent)
                             .withPresenter(UserDetailsPresenter(startingIntent.extras))
                             .build())
